@@ -61,6 +61,40 @@
       </v-card>
 </template>
 <script setup>
+import { ref, onMounted } from "vue";
+
+import axios from "axios";
+
+const data = ref([]);
+
+// const variable = import.meta.env.VITE_KEY
+// console.log(variable)
+
+onMounted(()=>{
+  getData()
+})
+
+const url = `https://sheets.googleapis.com/v4/spreadsheets/${GOOGLE_SPREADSHEET_ID}/values/A1%3AJ39?key=${GOOGLE_APIKey}`
+const getData = async () => {
+  const res = await axios.get(url);
+  const key = res.data.values[0]
+
+  res.data.values.shift()
+  let orgData = res.data.values
+
+  let result = [];
+
+  for (let i = 0; i < orgData.length; i++) {
+    let obj = {};
+    for (let j = 0; j < key.length; j++) {
+      obj[key[j]] = orgData[i][j];
+    }
+    result.push(obj);
+  }
+  data.value = result
+
+};
+
 
 </script>
 <style lang="">
