@@ -89,6 +89,7 @@
 <script setup>
 import { ref, onMounted, reactive } from "vue";
 import axios from "axios";
+import 'dotenv/config'
 
 const allData = ref([]);
 const randomVideo = ref({});
@@ -114,7 +115,9 @@ const filter = reactive({
 onMounted(() => {
   getData();
 });
-const url = `https://sheets.googleapis.com/v4/spreadsheets/${GOOGLE_SPREADSHEET_ID}/values/A1%3AJ39?key=${GOOGLE_APIKey}`
+
+const url = 'https://sheets.googleapis.com/v4/spreadsheets/1xaeYUyU54cIX83kLjr0BKurthKG-ubr5UueTP1ZTmmU/values/A1%3AJ39?key=AIzaSyDNhv7JTIJcBbk84rGb-UC7ys2TLK8669Q'
+
 const getData = async () => {
   const res = await axios.get(url);
   const key = res.data.values[0];
