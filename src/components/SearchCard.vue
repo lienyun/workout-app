@@ -19,6 +19,7 @@
           label="無跳躍"
           hide-details
           v-model="filter.noJump"
+          density="compact"
         ></v-checkbox>
       </v-col>
       <v-col cols="12" md="3">
@@ -26,6 +27,7 @@
           label="無器材"
           hide-details
           v-model="filter.noEquipment"
+          density="compact"
         ></v-checkbox>
       </v-col>
 
@@ -79,9 +81,9 @@
         >
         </v-select>
       </v-col>
-      <v-col cols="12" md="3" class="text-center">
-        <v-btn @click="search">搜尋</v-btn>
-        <v-btn class="ml-5">清除</v-btn>
+      <v-col cols="12" md="3">
+        <v-btn @click="search" color="success" prepend-icon="mdi-magnify" rounded="default">搜尋</v-btn>
+        <v-btn @click="clear" class="ml-5" color="warning" prepend-icon="mdi-window-close" rounded="default">清除</v-btn>
       </v-col>
     </v-row>
   </v-card>
@@ -89,12 +91,11 @@
 <script setup>
 import { ref, onMounted, reactive } from "vue";
 import axios from "axios";
-import 'dotenv/config'
 
 const allData = ref([]);
 const randomVideo = ref({});
 
-const emit = defineEmits(["searchVideo"]); 
+const emit = defineEmits(["searchVideo"]);
 
 const filter = reactive({
   title: null,
@@ -116,7 +117,7 @@ onMounted(() => {
   getData();
 });
 
-const url = 'https://sheets.googleapis.com/v4/spreadsheets/1xaeYUyU54cIX83kLjr0BKurthKG-ubr5UueTP1ZTmmU/values/A1%3AJ39?key=AIzaSyDNhv7JTIJcBbk84rGb-UC7ys2TLK8669Q'
+const url = import.meta.env.VITE_API;
 
 const getData = async () => {
   const res = await axios.get(url);
@@ -149,17 +150,16 @@ const getData = async () => {
       item.noJump = false;
     }
 
-    let urlId = item.url.split('/').pop()
-    let embeddedUrl = `https://www.youtube.com/embed/${urlId}`
+    let urlId = item.url.split("/").pop();
+    let embeddedUrl = `https://www.youtube.com/embed/${urlId}`;
 
-    return {...item, embeddedUrl};
+    return { ...item, embeddedUrl };
   });
   allData.value = newData;
   console.log("allData", allData.value);
 };
 
 const search = () => {
-  console.log(filter);
   let filterdData = allData.value.filter((item) => {
     if (filter.author !== null && item.author !== filter.author) {
       return false;
@@ -190,8 +190,23 @@ const search = () => {
 
   let randomIndex = Math.floor(Math.random() * filterdData.length);
   let randomObject = filterdData[randomIndex];
-  randomVideo.value = randomObject
-  emit("video",randomObject)
+  randomVideo.value = randomObject;
+  console.log("randomObject", randomObject);
+
+  emit("video", randomObject);
 };
+
+const clear = () =>{
+  filter.title = null
+  filter.url = null
+  filter.author = null
+  filter.bodyPart = null
+  filter.noJump = null
+  filter.noEquipment = null
+  filter.equimentType = null
+  filter.time = null
+  filter.difficuity = null
+  filter.type = null
+}
 </script>
 <style lang=""></style>

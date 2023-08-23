@@ -17,7 +17,7 @@ export default createVuetify(
           colors: {
             linkColor: '#000000DE',
             primary: '#F28585',
-            secondary: '#000',
+            secondary: '#86A69D',
             info: '#1976D2'
           }
         },
@@ -26,7 +26,7 @@ export default createVuetify(
           colors: {
             linkColor: '#fff',
             primary: '#F28585',
-            secondary: '#fff',
+            secondary: '#86A69D',
             info: '#1976D2'
           }
         },
