@@ -1,5 +1,6 @@
 <template lang="">
   <v-card class="pa-5">
+    <h3 class="mb-5">篩選條件</h3>
     <v-row>
       <v-col cols="12" md="3">
         <v-select
@@ -81,7 +82,7 @@
         >
         </v-select>
       </v-col>
-      <v-col cols="12" md="3">
+      <v-col cols="12" md="3" class="d-flex justify-end align-center">
         <v-btn @click="search" color="success" prepend-icon="mdi-magnify" rounded="default">搜尋</v-btn>
         <v-btn @click="clear" class="ml-5" color="warning" prepend-icon="mdi-window-close" rounded="default">清除</v-btn>
       </v-col>
@@ -91,11 +92,15 @@
 <script setup>
 import { ref, onMounted, reactive } from "vue";
 import axios from "axios";
+import { useDataStore } from '../stores/getData'
+
+const store = useDataStore()
+
 
 const allData = ref([]);
 const randomVideo = ref({});
-
-const emit = defineEmits(["searchVideo"]);
+const dialog = ref(true)
+const emit = defineEmits(["searchVideo","closeDialog"]);
 
 const filter = reactive({
   title: null,
@@ -110,56 +115,8 @@ const filter = reactive({
   type: null,
 });
 
-// const variable = import.meta.env.VITE_KEY
-// console.log(variable)
-
-onMounted(() => {
-  getData();
-});
-
-const url = import.meta.env.VITE_API;
-
-const getData = async () => {
-  const res = await axios.get(url);
-  const key = res.data.values[0];
-
-  res.data.values.shift();
-  let orgData = res.data.values;
-
-  let result = [];
-
-  for (let i = 0; i < orgData.length; i++) {
-    let obj = {};
-    for (let j = 0; j < key.length; j++) {
-      obj[key[j]] = orgData[i][j];
-    }
-    result.push(obj);
-  }
-
-  let newData = result.map((item) => {
-    item.bodyPart = item.bodyPart.split(", ").map((part) => part.trim());
-
-    if (item.noEquipment === "TRUE") {
-      item.noEquipment = true;
-    } else if (item.noEquipment === "FALSE") {
-      item.noEquipment = false;
-    }
-    if (item.noJump === "TRUE") {
-      item.noJump = true;
-    } else if (item.noJump === "FALSE") {
-      item.noJump = false;
-    }
-
-    let urlId = item.url.split("/").pop();
-    let embeddedUrl = `https://www.youtube.com/embed/${urlId}`;
-
-    return { ...item, embeddedUrl };
-  });
-  allData.value = newData;
-  console.log("allData", allData.value);
-};
-
 const search = () => {
+  allData.value = store.allData
   let filterdData = allData.value.filter((item) => {
     if (filter.author !== null && item.author !== filter.author) {
       return false;
@@ -191,9 +148,9 @@ const search = () => {
   let randomIndex = Math.floor(Math.random() * filterdData.length);
   let randomObject = filterdData[randomIndex];
   randomVideo.value = randomObject;
-  console.log("randomObject", randomObject);
 
   emit("video", randomObject);
+  emit("closeDialog",false)
 };
 
 const clear = () =>{
@@ -207,6 +164,7 @@ const clear = () =>{
   filter.time = null
   filter.difficuity = null
   filter.type = null
+  emit("closeDialog",false)
 }
 </script>
 <style lang=""></style>
