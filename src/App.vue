@@ -10,7 +10,6 @@
 
       <v-spacer></v-spacer>
 
-      <!-- <v-btn variant="text" icon="mdi-magnify"></v-btn> -->
       <v-btn variant="text" icon="mdi-filter" @click="dialog = true"></v-btn>
 
       <v-dialog
@@ -44,13 +43,17 @@
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           ></iframe>
           <v-btn @click="search" prepend-icon="mdi-magnify" rounded="default" color="success" block class="mt-5">我ㄅ要，我要重新選擇</v-btn>
+          <v-btn @click="dialog = true" prepend-icon="mdi-magnify" rounded="default" color="warning" block class="mt-3">我有條件要設定</v-btn>
         </div>
       </v-card>
-      <v-card class="mt-5" v-if="hasResult === 'noResult'">
-        <h2 class="text-center">
-          無條件搜尋結果，可以投稿影片給我納入資料庫！
-        </h2>
-      </v-card>
+      <div class="mt-5 d-flex flex-column align-center" v-if="hasResult === 'noResult'">
+        <img src="/empty-box.png" alt="" class="w-50">
+        <p class="mt-3 text-center">你條件太嚴苛了！資料庫目前沒有資料QQ
+          <br>
+          歡迎填寫表單協助我壯大資料庫🏋️
+        </p>
+        <v-btn @click="dialog = true" prepend-icon="mdi-magnify" rounded="default" color="success" block class="mt-3">重新搜尋</v-btn>
+      </div>
       </div>
       
     </v-main>
