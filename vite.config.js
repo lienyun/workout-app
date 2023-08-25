@@ -6,7 +6,7 @@ import vuetify from 'vite-plugin-vuetify'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-	base: '/workout-app/',
+	base: '/',
 	plugins: [
 		vue(),
 		vuetify({ autoImport: true }),
