@@ -86,6 +86,7 @@
         <v-btn @click="search" color="success" prepend-icon="mdi-magnify" rounded="default">搜尋</v-btn>
         <v-btn @click="clear" class="ml-5" color="warning" prepend-icon="mdi-window-close" rounded="default">清除</v-btn>
       </v-col>
+      <v-btn variant="text" rounded="default" block @click="close">關閉</v-btn>
     </v-row>
   </v-card>
 </template>
@@ -164,6 +165,9 @@ const clear = () =>{
   filter.time = null
   filter.difficuity = null
   filter.type = null
+}
+
+const close = () =>{
   emit("closeDialog",false)
 }
 </script>
