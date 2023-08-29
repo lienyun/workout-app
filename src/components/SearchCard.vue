@@ -49,7 +49,7 @@
           variant="outlined"
           density="compact"
           hide-details
-          :items="['有氧', '肌力', '混合']"
+          :items="['有氧', '肌力', '混合','瑜珈','拉筋']"
           v-model="filter.type"
         >
         </v-select>
@@ -77,7 +77,7 @@
           variant="outlined"
           density="compact"
           hide-details
-          :items="['May Fit', 'Coffee', 'Emi Wong', 'Pamela']"
+          :items="['May Fit', 'Coffee', 'Emi Wong', 'Pamela','MIZI']"
           v-model="filter.author"
         >
         </v-select>
