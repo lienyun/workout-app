@@ -11,7 +11,7 @@
 
     <v-btn variant="text" icon="mdi-filter" @click="dialog = true"></v-btn>
 
-    <v-dialog v-model="dialog" width="auto">
+    <v-dialog v-model="dialog" width="auto" scrollable>
       <SearchCard @video="video" @closeDialog="closeDialog" />
     </v-dialog>
 
@@ -39,8 +39,10 @@
       </div>
       <v-card class="mt-5" v-if="hasResult === 'result'">
         <h2 class="text-center mt-5">就決定做這支了！</h2>
-        <div class="ma-5 youtube">
-          <h3 class="text-center mb-3">{{ resultVideo.title }}</h3>
+        <div class="ma-5 youtube text-center">
+          <v-chip class="mb-3" color="primary">{{resultVideo.author}}</v-chip>
+          <h3 :class="resultVideo.equimentType? '':'mb-3'">{{ resultVideo.title }}</h3>
+          <h4 v-if="resultVideo.equimentType" class="mb-3">器材：{{resultVideo.equimentType}}</h4>
           <iframe
             :src="resultVideo.embeddedUrl"
             title="YouTube video player"
