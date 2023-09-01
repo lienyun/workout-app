@@ -16,9 +16,11 @@ export default createVuetify(
           dark: false,
           colors: {
             linkColor: '#000000DE',
-            primary: '#F28585',
-            secondary: '#86A69D',
-            info: '#1976D2'
+            primary: '#FF6B81', //桃紅色
+            secondary: '#FDCB6E', //黃色
+            info: '#2F3542',//鐵灰色
+            background: '#F4E3E3',
+            white: '#F4F4F4'
           }
         },
         customDarkTheme: {
