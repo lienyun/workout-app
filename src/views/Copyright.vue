@@ -1,23 +1,5 @@
 <template lang="">
-  <v-app-bar color="primary" prominent>
-    <v-app-bar-nav-icon
-      variant="text"
-      @click.stop="drawer = !drawer"
-    ></v-app-bar-nav-icon>
-
-    <v-toolbar-title>今天健什麼</v-toolbar-title>
-
-    <v-spacer></v-spacer>
-
-    <router-link to="/search">
-      <v-btn variant="text" icon="mdi-magnify" color="white"></v-btn>
-    </router-link>
-
-    <v-btn variant="text" icon="mdi-dots-vertical"></v-btn>
-  </v-app-bar>
-
-  <NavigationDrawer :drawer="drawer"></NavigationDrawer>
-
+  <AppBar></AppBar>
   <v-main class="ma-5">
     <div class="text-center mb-5">
       <h3>版權資訊</h3>
@@ -50,7 +32,7 @@
 </template>
 <script setup>
 import { ref, reactive } from "vue";
-import NavigationDrawer from "../components/NavigationDrawer.vue";
+import AppBar from "../components/AppBar.vue";
 
 const drawer = ref(false);
 

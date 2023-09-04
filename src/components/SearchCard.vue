@@ -101,7 +101,7 @@ const store = useDataStore()
 const allData = ref([]);
 const randomVideo = ref({});
 const dialog = ref(true)
-const emit = defineEmits(["searchVideo","closeDialog"]);
+const emit = defineEmits(["searchVideo","closeDialog","filter"]);
 
 const filter = reactive({
   title: null,
@@ -152,6 +152,7 @@ const search = () => {
 
   emit("video", randomObject);
   emit("closeDialog",false)
+  emit("filter",filter)
 };
 
 const clear = () =>{

@@ -5,14 +5,16 @@
       @click.stop="drawer = !drawer"
     ></v-app-bar-nav-icon>
 
-    <v-toolbar-title>今天健什麼</v-toolbar-title>
+    <v-toolbar-title
+      ><router-link to="/search">今天健什麼</router-link></v-toolbar-title
+    >
 
     <v-spacer></v-spacer>
 
     <v-btn variant="text" icon="mdi-filter" @click="dialog = true"></v-btn>
 
     <v-dialog v-model="dialog" width="auto" scrollable>
-      <SearchCard @video="video" @closeDialog="closeDialog" />
+      <SearchCard @video="video" @closeDialog="closeDialog" @filter="filter" />
     </v-dialog>
 
     <v-btn variant="text" icon="mdi-dots-vertical"></v-btn>
@@ -28,7 +30,7 @@
       >
         <img src="/lunges.png" alt="" class="w-50" />
         <v-btn
-          @click="search"
+          @click="allRandomSearch"
           prepend-icon="mdi-magnify"
           rounded="default"
           color="success"
@@ -40,9 +42,13 @@
       <v-card class="mt-5" v-if="hasResult === 'result'">
         <h2 class="text-center mt-5">就決定做這支了！</h2>
         <div class="ma-5 youtube text-center">
-          <v-chip class="mb-3" color="primary">{{resultVideo.author}}</v-chip>
-          <h3 :class="resultVideo.equimentType? '':'mb-3'">{{ resultVideo.title }}</h3>
-          <h4 v-if="resultVideo.equimentType" class="mb-3">器材：{{resultVideo.equimentType}}</h4>
+          <v-chip class="mb-3" color="primary">{{ resultVideo.author }}</v-chip>
+          <h3 :class="resultVideo.equimentType ? '' : 'mb-3'">
+            {{ resultVideo.title }}
+          </h3>
+          <h4 v-if="resultVideo.equimentType" class="mb-3">
+            器材：{{ resultVideo.equimentType }}
+          </h4>
           <iframe
             :src="resultVideo.embeddedUrl"
             title="YouTube video player"
@@ -50,13 +56,13 @@
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           ></iframe>
           <v-btn
-            @click="search"
+            @click="originalSearch"
             prepend-icon="mdi-magnify"
             rounded="default"
             color="success"
             block
             class="mt-5"
-            >我ㄅ要，我要重新選擇</v-btn
+            >依照原條件搜尋</v-btn
           >
           <v-btn
             @click="dialog = true"
@@ -65,7 +71,7 @@
             color="warning"
             block
             class="mt-3"
-            >我有條件要設定</v-btn
+            >修改條件重新搜尋</v-btn
           >
         </div>
       </v-card>
@@ -93,7 +99,7 @@
   </v-main>
 </template>
 <script setup>
-import { ref, watch, onMounted } from "vue";
+import { ref, watch, onMounted, reactive } from "vue";
 import { useDataStore } from "../stores/getData";
 import SearchCard from "../components/SearchCard.vue";
 import NavigationDrawer from "../components/NavigationDrawer.vue";
@@ -123,8 +129,7 @@ const closeDialog = (val) => {
 };
 
 const group = ref(null);
-const drawer = ref(false)
-
+const drawer = ref(false);
 
 watch(group, () => {
   drawer.value = false;
@@ -132,11 +137,52 @@ watch(group, () => {
 
 const dialog = ref(false);
 
-const search = () => {
+const allRandomSearch = () => {
   let randomIndex = Math.floor(Math.random() * allData.value.length);
   let randomObject = allData.value[randomIndex];
   resultVideo.value = randomObject;
   hasResult.value = "result";
+};
+
+const searchFilter = ref();
+
+const filter = (val) => {
+  searchFilter.value = val;
+};
+
+const originalSearch = () => {
+  let filter = searchFilter.value
+  let filterdData = allData.value.filter((item) => {
+    if (filter.author !== null && item.author !== filter.author) {
+      return false;
+    }
+    if (filter.bodyPart !== null) {
+      if (!item.bodyPart.includes(...filter.bodyPart)) {
+        return false;
+      }
+    }
+
+    if (
+      filter.noEquipment !== null &&
+      item.noEquipment !== filter.noEquipment
+    ) {
+      return false;
+    }
+    if (filter.difficuity !== null && item.difficuity !== filter.difficuity) {
+      return false;
+    }
+    if (filter.type !== null && item.type !== filter.type) {
+      return false;
+    }
+    if (filter.time !== null && item.time !== filter.time) {
+      return false;
+    }
+    return true;
+  });
+
+  let randomIndex = Math.floor(Math.random() * filterdData.length);
+  let randomObject = filterdData[randomIndex];
+  resultVideo.value = randomObject;
 };
 </script>
 <style scoped>
@@ -144,5 +190,4 @@ const search = () => {
   width: 100%;
   height: 500px;
 }
-
 </style>
