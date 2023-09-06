@@ -151,38 +151,42 @@ const filter = (val) => {
 };
 
 const originalSearch = () => {
-  let filter = searchFilter.value
-  let filterdData = allData.value.filter((item) => {
-    if (filter.author !== null && item.author !== filter.author) {
-      return false;
-    }
-    if (filter.bodyPart !== null) {
-      if (!item.bodyPart.includes(...filter.bodyPart)) {
+  let filter = searchFilter.value;
+  console.log(filter)
+  if (filter) {
+    let filterdData = allData.value.filter((item) => {
+      if (filter.author !== null && item.author !== filter.author) {
         return false;
       }
-    }
+      if (filter.bodyPart !== null) {
+        if (!item.bodyPart.includes(...filter.bodyPart)) {
+          return false;
+        }
+      }
+      if (
+        filter.noEquipment !== null &&
+        item.noEquipment !== filter.noEquipment
+      ) {
+        return false;
+      }
+      if (filter.difficuity !== null && item.difficuity !== filter.difficuity) {
+        return false;
+      }
+      if (filter.type !== null && item.type !== filter.type) {
+        return false;
+      }
+      if (filter.time !== null && item.time !== filter.time) {
+        return false;
+      }
+      return true;
+    });
 
-    if (
-      filter.noEquipment !== null &&
-      item.noEquipment !== filter.noEquipment
-    ) {
-      return false;
-    }
-    if (filter.difficuity !== null && item.difficuity !== filter.difficuity) {
-      return false;
-    }
-    if (filter.type !== null && item.type !== filter.type) {
-      return false;
-    }
-    if (filter.time !== null && item.time !== filter.time) {
-      return false;
-    }
-    return true;
-  });
-
-  let randomIndex = Math.floor(Math.random() * filterdData.length);
-  let randomObject = filterdData[randomIndex];
-  resultVideo.value = randomObject;
+    let randomIndex = Math.floor(Math.random() * filterdData.length);
+    let randomObject = filterdData[randomIndex];
+    resultVideo.value = randomObject;
+  }else{
+    allRandomSearch()
+  }
 };
 </script>
 <style scoped>
