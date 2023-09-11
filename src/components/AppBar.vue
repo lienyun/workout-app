@@ -9,11 +9,11 @@
 
     <v-spacer></v-spacer>
 
-    <router-link to="/search">
+    <!-- <router-link to="/search">
       <v-btn variant="text" icon="mdi-magnify" color="white"></v-btn>
-    </router-link>
+    </router-link> -->
 
-    <v-btn variant="text" icon="mdi-dots-vertical"></v-btn>
+    <!-- <v-btn variant="text" icon="mdi-dots-vertical"></v-btn> -->
   </v-app-bar>
 
   <NavigationDrawer :drawer="drawer"></NavigationDrawer>

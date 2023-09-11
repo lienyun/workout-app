@@ -17,7 +17,7 @@
       <SearchCard @video="video" @closeDialog="closeDialog" @filter="filter" />
     </v-dialog>
 
-    <v-btn variant="text" icon="mdi-dots-vertical"></v-btn>
+    <!-- <v-btn variant="text" icon="mdi-dots-vertical"></v-btn> -->
   </v-app-bar>
 
   <NavigationDrawer :drawer="drawer"></NavigationDrawer>
@@ -152,7 +152,6 @@ const filter = (val) => {
 
 const originalSearch = () => {
   let filter = searchFilter.value;
-  console.log(filter)
   if (filter) {
     let filterdData = allData.value.filter((item) => {
       if (filter.author !== null && item.author !== filter.author) {
