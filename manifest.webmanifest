@@ -1,1 +1,1 @@
-{"name":"今天健什麼","short_name":"workout","start_url":"./","display":"standalone","background_color":"#ffffff","lang":"en","scope":"./","description":"Better late than never.","theme_color":"#FF6B81","icons":[{"src":"./lunges.png","sizes":"192x192","type":"image/png"}]}
+{"name":"今天健什麼","short_name":"workout","start_url":"./","display":"standalone","background_color":"#ffffff","lang":"en","scope":"./","description":"Better late than never.","theme_color":"#FF6B81","icons":[{"src":"./pwa-logo.png","sizes":"512x512","type":"image/png"}]}
