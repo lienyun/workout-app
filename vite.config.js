@@ -35,16 +35,16 @@ export default defineConfig({
         display: 'standalone',
         // icon 路徑，./ 代表 public
         icons: [
-          {
-            src: './lunges.png',
-            sizes: '192x192',
-            type: 'image/png'
-          },
           // {
-          //   src: 'android-chrome-512x512.png',
-          //   sizes: '512x512',
+          //   src: './lunges.png',
+          //   sizes: '192x192',
           //   type: 'image/png'
-          // }
+          // },
+          {
+            src: './pwa-logo.png',
+            sizes: '512x512',
+            type: 'image/png'
+          }
         ]
       }
     })

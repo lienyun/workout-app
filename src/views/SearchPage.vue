@@ -39,22 +39,25 @@
           >隨機選擇</v-btn
         >
       </div>
-      <v-card class="mt-5" v-if="hasResult === 'result'">
+      <v-card class="mt-5 pa-5" v-if="hasResult === 'result'">
         <h2 class="text-center mt-5">就決定做這支了！</h2>
-        <div class="ma-5 youtube text-center">
-          <v-chip class="mb-3" color="primary">{{ resultVideo.author }}</v-chip>
+        <div class="youtube text-center">
+          <v-chip class="mb-3 mt-3" color="primary">{{ resultVideo.author }}</v-chip>
           <h3 :class="resultVideo.equimentType ? '' : 'mb-3'">
             {{ resultVideo.title }}
           </h3>
           <h4 v-if="resultVideo.equimentType" class="mb-3">
             器材：{{ resultVideo.equimentType }}
           </h4>
-          <iframe
-            :src="resultVideo.embeddedUrl"
-            title="YouTube video player"
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          ></iframe>
+          <div class="video-box">
+            <iframe
+              :src="resultVideo.embeddedUrl"
+              title="YouTube video player"
+              frameborder="0"
+              allowFullScreen="true"
+            ></iframe>
+          </div>
+
           <v-btn
             @click="originalSearch"
             prepend-icon="mdi-magnify"
@@ -183,14 +186,32 @@ const originalSearch = () => {
     let randomIndex = Math.floor(Math.random() * filterdData.length);
     let randomObject = filterdData[randomIndex];
     resultVideo.value = randomObject;
-  }else{
-    allRandomSearch()
+  } else {
+    allRandomSearch();
   }
 };
 </script>
 <style scoped>
-.youtube iframe {
+.video-box {
+  position: relative;
   width: 100%;
-  height: 500px;
+  height: 0;
+  padding-bottom: 56.25%;
+}
+
+.video-box iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.video-box embed {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
 </style>
