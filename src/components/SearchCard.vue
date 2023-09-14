@@ -61,7 +61,6 @@
           density="compact"
           hide-details
           :items="[
-            '5分鐘內',
             '5-10分鐘',
             '10-20分鐘',
             '20-30分鐘',
@@ -83,10 +82,10 @@
         </v-select>
       </v-col>
       <v-col cols="12" md="3" class="d-flex justify-end align-center">
-        <v-btn @click="search" color="success" prepend-icon="mdi-magnify" rounded="default">搜尋</v-btn>
-        <v-btn @click="clear" class="ml-5" color="warning" prepend-icon="mdi-window-close" rounded="default">清除</v-btn>
+        <v-btn @click="clear" color="red" prepend-icon="mdi-window-close" rounded="default">清除</v-btn>
+        <v-btn @click="search" class="ml-5" color="success" prepend-icon="mdi-magnify" rounded="default">搜尋</v-btn>
       </v-col>
-      <v-btn variant="text" rounded="default" block @click="close">關閉</v-btn>
+      <v-btn variant="text" rounded="default" block @click="close" color="primary">關閉</v-btn>
     </v-row>
   </v-card>
 </template>

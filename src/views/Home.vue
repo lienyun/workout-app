@@ -10,7 +10,7 @@
       <div class="deco deco2 bg-primary"></div>
 
       <router-link to="/search" class="mt-5">
-        <v-btn rounded="default" variant="tonal">let's go!!</v-btn>
+        <v-btn rounded="default" variant="tonal" size="large">let's go!!</v-btn>
       </router-link>
     </div>
   </v-main>
