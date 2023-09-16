@@ -2,13 +2,25 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" href="/workout-app/lunges.png" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="theme-color" content="#FF6B81">
+
     <title>今天健什麼</title>
-  <script type="module" crossorigin src="/workout-app/assets/index-7d4fd76b.js"></script>
-  <link rel="stylesheet" href="/workout-app/assets/index-f9a9f906.css">
-</head>
+    <meta name="description" content="Your app description">
+    <link rel="icon" href="/workout-app/pwa-logo.png" type="image/svg+xml">
+    <link rel="alternate icon" href="/workout-app/pwa-logo.png" type="image/png" sizes="16x16">
+    <link rel="apple-touch-icon" href="/workout-app/pwa-logo.png" sizes="180x180">
+    <link rel="mask-icon" href="/workout-app/pwa-logo.png">
+    <link rel="manifest" href="data:application/json;base64,ew0KICAiaWNvbnMiOiBbDQogICAgew0KICAgICAgInNyYyI6ICIuL2ltZy9pY29ucy9hbmRyb2lkLWNocm9tZS0xOTJ4MTkyLnBuZyIsDQogICAgICAic2l6ZXMiOiAiMTkyeDE5MiIsDQogICAgICAidHlwZSI6ICJpbWFnZS9wbmciDQogICAgfSwNCiAgICB7DQogICAgICAic3JjIjogIi4vaW1nL2ljb25zL2FuZHJvaWQtY2hyb21lLTUxMng1MTIucG5nIiwNCiAgICAgICJzaXplcyI6ICI1MTJ4NTEyIiwNCiAgICAgICJ0eXBlIjogImltYWdlL3BuZyINCiAgICB9LA0KICAgIHsNCiAgICAgICJzcmMiOiAiLi9pbWcvaWNvbnMvYW5kcm9pZC1jaHJvbWUtbWFza2FibGUtMTkyeDE5Mi5wbmciLA0KICAgICAgInNpemVzIjogIjE5MngxOTIiLA0KICAgICAgInR5cGUiOiAiaW1hZ2UvcG5nIiwNCiAgICAgICJwdXJwb3NlIjogIm1hc2thYmxlIg0KICAgIH0sDQogICAgew0KICAgICAgInNyYyI6ICIuL2ltZy9pY29ucy9hbmRyb2lkLWNocm9tZS1tYXNrYWJsZS01MTJ4NTEyLnBuZyIsDQogICAgICAic2l6ZXMiOiAiNTEyeDUxMiIsDQogICAgICAidHlwZSI6ICJpbWFnZS9wbmciLA0KICAgICAgInB1cnBvc2UiOiAibWFza2FibGUiDQogICAgfSwNCiAgICB7DQogICAgICAic3JjIjogIi4vaW1nL2ljb25zL2FwcGxlLXRvdWNoLWljb24tNjB4NjAucG5nIiwNCiAgICAgICJzaXplcyI6ICI2MHg2MCIsDQogICAgICAidHlwZSI6ICJpbWFnZS9wbmciDQogICAgfSwNCiAgICB7DQogICAgICAic3JjIjogIi4vaW1nL2ljb25zL2FwcGxlLXRvdWNoLWljb24tNzZ4NzYucG5nIiwNCiAgICAgICJzaXplcyI6ICI3Nng3NiIsDQogICAgICAidHlwZSI6ICJpbWFnZS9wbmciDQogICAgfSwNCiAgICB7DQogICAgICAic3JjIjogIi4vaW1nL2ljb25zL2FwcGxlLXRvdWNoLWljb24tMTIweDEyMC5wbmciLA0KICAgICAgInNpemVzIjogIjEyMHgxMjAiLA0KICAgICAgInR5cGUiOiAiaW1hZ2UvcG5nIg0KICAgIH0sDQogICAgew0KICAgICAgInNyYyI6ICIuL2ltZy9pY29ucy9hcHBsZS10b3VjaC1pY29uLTE1MngxNTIucG5nIiwNCiAgICAgICJzaXplcyI6ICIxNTJ4MTUyIiwNCiAgICAgICJ0eXBlIjogImltYWdlL3BuZyINCiAgICB9LA0KICAgIHsNCiAgICAgICJzcmMiOiAiLi9pbWcvaWNvbnMvYXBwbGUtdG91Y2gtaWNvbi0xODB4MTgwLnBuZyIsDQogICAgICAic2l6ZXMiOiAiMTgweDE4MCIsDQogICAgICAidHlwZSI6ICJpbWFnZS9wbmciDQogICAgfSwNCiAgICB7DQogICAgICAic3JjIjogIi4vaW1nL2ljb25zL2FwcGxlLXRvdWNoLWljb24ucG5nIiwNCiAgICAgICJzaXplcyI6ICIxODB4MTgwIiwNCiAgICAgICJ0eXBlIjogImltYWdlL3BuZyINCiAgICB9LA0KICAgIHsNCiAgICAgICJzcmMiOiAiLi9pbWcvaWNvbnMvZmF2aWNvbi0xNngxNi5wbmciLA0KICAgICAgInNpemVzIjogIjE2eDE2IiwNCiAgICAgICJ0eXBlIjogImltYWdlL3BuZyINCiAgICB9LA0KICAgIHsNCiAgICAgICJzcmMiOiAiLi9pbWcvaWNvbnMvZmF2aWNvbi0zMngzMi5wbmciLA0KICAgICAgInNpemVzIjogIjMyeDMyIiwNCiAgICAgICJ0eXBlIjogImltYWdlL3BuZyINCiAgICB9LA0KICAgIHsNCiAgICAgICJzcmMiOiAiLi9pbWcvaWNvbnMvbXNhcHBsaWNhdGlvbi1pY29uLTE0NHgxNDQucG5nIiwNCiAgICAgICJzaXplcyI6ICIxNDR4MTQ0IiwNCiAgICAgICJ0eXBlIjogImltYWdlL3BuZyINCiAgICB9LA0KICAgIHsNCiAgICAgICJzcmMiOiAiLi9pbWcvaWNvbnMvbXN0aWxlLTE1MHgxNTAucG5nIiwNCiAgICAgICJzaXplcyI6ICIxNTB4MTUwIiwNCiAgICAgICJ0eXBlIjogImltYWdlL3BuZyINCiAgICB9DQogIF0NCn0=">
+    <style>
+      body {
+        background-color: #fff;
+      }
+    </style>
+    <script type="module" crossorigin src="/workout-app/assets/index-b951e95f.js"></script>
+    <link rel="stylesheet" href="/workout-app/assets/index-4824186a.css">
+  <link rel="manifest" href="/workout-app/manifest.webmanifest"></head>
 
 <body>
     <div id="app"></div>
