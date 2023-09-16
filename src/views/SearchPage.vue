@@ -14,10 +14,8 @@
     <v-btn variant="text" icon="mdi-filter" @click="dialog = true"></v-btn>
 
     <v-dialog v-model="dialog" width="auto" scrollable>
-      <SearchCard @video="video" @closeDialog="closeDialog" @filter="filter" />
+      <SearchCard @video="video" @closeDialog="closeDialog" @filter="filter" :reSearch="searchFilter"/>
     </v-dialog>
-
-    <!-- <v-btn variant="text" icon="mdi-dots-vertical"></v-btn> -->
   </v-app-bar>
 
   <NavigationDrawer :drawer="drawer"></NavigationDrawer>
@@ -28,7 +26,7 @@
         class="mt-5 d-flex flex-column align-center"
         v-if="hasResult === 'beforeSearch'"
       >
-        <img src="/lunges.png" alt="" class="w-50" />
+        <img src="/search.png" class="search-img" alt=""/>
         <v-btn
           @click="allRandomSearch"
           prepend-icon="mdi-magnify"
@@ -213,5 +211,9 @@ const originalSearch = () => {
   left: 0;
   width: 100%;
   height: 100%;
+}
+
+.search-img {
+  width: 250px;
 }
 </style>

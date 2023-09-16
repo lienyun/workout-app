@@ -44,7 +44,6 @@ export const useDataStore = defineStore("data", () => {
       return { ...item, embeddedUrl };
     });
     allData.value = newData;
-    console.log("allData", allData.value);
   };
 
   return { allData, getData };

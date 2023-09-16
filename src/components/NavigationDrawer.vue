@@ -23,7 +23,6 @@ const props = defineProps({
   drawer: Boolean
 })
 
-console.log(props.drawer)
 
 </script>
 <style scoped>

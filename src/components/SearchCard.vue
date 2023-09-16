@@ -1,6 +1,10 @@
 <template lang="">
   <v-card class="pa-5">
-    <h3 class="mb-5">篩選條件</h3>
+    <div class="d-flex align-center justify-space-between mb-5">
+      <h3>篩選條件</h3>
+      <v-btn icon="mdi-close" variant="text" color="info" @click="close"></v-btn>
+    </div>
+
     <v-row>
       <v-col cols="12" md="3">
         <v-select
@@ -85,7 +89,6 @@
         <v-btn @click="clear" color="red" prepend-icon="mdi-window-close" rounded="default">清除</v-btn>
         <v-btn @click="search" class="ml-5" color="success" prepend-icon="mdi-magnify" rounded="default">搜尋</v-btn>
       </v-col>
-      <v-btn variant="text" rounded="default" block @click="close" color="primary">關閉</v-btn>
     </v-row>
   </v-card>
 </template>
@@ -96,15 +99,7 @@ import { useDataStore } from '../stores/getData'
 
 const store = useDataStore()
 
-
-const allData = ref([]);
-const randomVideo = ref({});
-const dialog = ref(true)
-const emit = defineEmits(["searchVideo","closeDialog","filter"]);
-
 const filter = reactive({
-  title: null,
-  url: null,
   author: null,
   bodyPart: null,
   noJump: null,
@@ -114,6 +109,29 @@ const filter = reactive({
   difficuity: null,
   type: null,
 });
+
+const props = defineProps({
+  reSearch: Object
+})
+
+if(props.reSearch !== undefined){
+  filter.author = props.reSearch.author
+  filter.bodyPart = props.reSearch.bodyPart
+  filter.noJump = props.reSearch.noJump
+  filter.noEquipment = props.reSearch.noEquipment
+  filter.equimentType = props.reSearch.equimentType
+  filter.time = props.reSearch.time
+  filter.difficuity = props.reSearch.difficuity
+  filter.type = props.reSearch.type
+}
+
+
+const allData = ref([]);
+const randomVideo = ref({});
+const dialog = ref(true)
+const emit = defineEmits(["searchVideo", "closeDialog", "filter"]);
+
+
 
 const search = () => {
   allData.value = store.allData
@@ -150,13 +168,11 @@ const search = () => {
   randomVideo.value = randomObject;
 
   emit("video", randomObject);
-  emit("closeDialog",false)
-  emit("filter",filter)
+  emit("closeDialog", false)
+  emit("filter", filter)
 };
 
-const clear = () =>{
-  filter.title = null
-  filter.url = null
+const clear = () => {
   filter.author = null
   filter.bodyPart = null
   filter.noJump = null
@@ -167,8 +183,8 @@ const clear = () =>{
   filter.type = null
 }
 
-const close = () =>{
-  emit("closeDialog",false)
+const close = () => {
+  emit("closeDialog", false)
 }
 </script>
 <style lang=""></style>
