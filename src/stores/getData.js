@@ -38,6 +38,10 @@ export const useDataStore = defineStore("data", () => {
         item.noJump = false;
       }
 
+      if(item.equimentType === '') {
+        item.equimentType = null
+      }
+
       let urlId = item.url.split("/").pop();
       let embeddedUrl = `https://www.youtube.com/embed/${urlId}`;
 

@@ -37,7 +37,7 @@
           >隨機選擇</v-btn
         >
       </div>
-      <v-card class="mt-5 pa-5" v-if="hasResult === 'result'">
+      <v-card class="mt-5 pa-5" v-else-if="hasResult === 'result'">
         <h2 class="text-center mt-5">就決定做這支了！</h2>
         <div class="youtube text-center">
           <v-chip class="mb-3 mt-3" color="primary">{{ resultVideo.author }}</v-chip>
@@ -78,7 +78,7 @@
       </v-card>
       <div
         class="mt-5 d-flex flex-column align-center"
-        v-if="hasResult === 'noResult'"
+        v-else-if="hasResult === 'noResult'"
       >
         <img src="/empty-box.png" alt="" class="w-50" />
         <p class="mt-3 text-center">

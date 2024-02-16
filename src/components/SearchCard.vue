@@ -14,7 +14,7 @@
           hide-details
           multiple
           chips
-          v-model="filter.bodyPart"
+          v-model="customizeFilter.bodyPart"
           :items="['上肢', '臀腿', '核心', '全身']"
         >
         </v-select>
@@ -23,7 +23,7 @@
         <v-checkbox
           label="無跳躍"
           hide-details
-          v-model="filter.noJump"
+          v-model="customizeFilter.noJump"
           density="compact"
         ></v-checkbox>
       </v-col>
@@ -31,7 +31,7 @@
         <v-checkbox
           label="無器材"
           hide-details
-          v-model="filter.noEquipment"
+          v-model="customizeFilter.noEquipment"
           density="compact"
         ></v-checkbox>
       </v-col>
@@ -43,7 +43,7 @@
           density="compact"
           hide-details
           :items="['簡單', '適中', '困難']"
-          v-model="filter.difficuity"
+          v-model="customizeFilter.difficuity"
         >
         </v-select>
       </v-col>
@@ -54,7 +54,7 @@
           density="compact"
           hide-details
           :items="['有氧', '肌力', '混合','瑜珈','拉筋']"
-          v-model="filter.type"
+          v-model="customizeFilter.type"
         >
         </v-select>
       </v-col>
@@ -70,7 +70,7 @@
             '20-30分鐘',
             '30分鐘以上',
           ]"
-          v-model="filter.time"
+          v-model="customizeFilter.time"
         >
         </v-select>
       </v-col>
@@ -81,7 +81,7 @@
           density="compact"
           hide-details
           :items="['May Fit', 'Coffee', 'Emi Wong', 'Pamela','MIZI']"
-          v-model="filter.author"
+          v-model="customizeFilter.author"
         >
         </v-select>
       </v-col>
@@ -99,7 +99,7 @@ import { useDataStore } from '../stores/getData'
 
 const store = useDataStore()
 
-const filter = reactive({
+const customizeFilter = reactive({
   author: null,
   bodyPart: null,
   noJump: null,
@@ -114,15 +114,16 @@ const props = defineProps({
   reSearch: Object
 })
 
-if(props.reSearch !== undefined){
-  filter.author = props.reSearch.author
-  filter.bodyPart = props.reSearch.bodyPart
-  filter.noJump = props.reSearch.noJump
-  filter.noEquipment = props.reSearch.noEquipment
-  filter.equimentType = props.reSearch.equimentType
-  filter.time = props.reSearch.time
-  filter.difficuity = props.reSearch.difficuity
-  filter.type = props.reSearch.type
+if (props.reSearch) {
+  console.log(props.reSearch)
+  customizeFilter.author = props.reSearch.author
+  customizeFilter.bodyPart = props.reSearch.bodyPart
+  customizeFilter.noJump = props.reSearch.noJump
+  customizeFilter.noEquipment = props.reSearch.noEquipment
+  customizeFilter.equimentType = props.reSearch.equimentType
+  customizeFilter.time = props.reSearch.time
+  customizeFilter.difficuity = props.reSearch.difficuity
+  customizeFilter.type = props.reSearch.type
 }
 
 
@@ -135,33 +136,24 @@ const emit = defineEmits(["searchVideo", "closeDialog", "filter"]);
 
 const search = () => {
   allData.value = store.allData
-  let filterdData = allData.value.filter((item) => {
-    if (filter.author !== null && item.author !== filter.author) {
-      return false;
-    }
-    if (filter.bodyPart !== null) {
-      if (!item.bodyPart.includes(...filter.bodyPart)) {
-        return false;
-      }
-    }
+  let filter = (condition, data) => {
+    return data.filter(item => {
+      return Object.keys(condition).every(key => {
+        if (condition[key]) {
+          if (Array.isArray(condition[key])) {
+            return item[key].some(i => condition[key].includes(i))
+          } else {
+            return item[key] === condition[key]
+          }
+        } else {
+          return allData.value
+        }
 
-    if (
-      filter.noEquipment !== null &&
-      item.noEquipment !== filter.noEquipment
-    ) {
-      return false;
-    }
-    if (filter.difficuity !== null && item.difficuity !== filter.difficuity) {
-      return false;
-    }
-    if (filter.type !== null && item.type !== filter.type) {
-      return false;
-    }
-    if (filter.time !== null && item.time !== filter.time) {
-      return false;
-    }
-    return true;
-  });
+      })
+    })
+
+  }
+  let filterdData = filter(customizeFilter, allData.value)
 
   let randomIndex = Math.floor(Math.random() * filterdData.length);
   let randomObject = filterdData[randomIndex];
@@ -169,18 +161,18 @@ const search = () => {
 
   emit("video", randomObject);
   emit("closeDialog", false)
-  emit("filter", filter)
+  emit("filter", customizeFilter)
 };
 
 const clear = () => {
-  filter.author = null
-  filter.bodyPart = null
-  filter.noJump = null
-  filter.noEquipment = null
-  filter.equimentType = null
-  filter.time = null
-  filter.difficuity = null
-  filter.type = null
+  customizeFilter.author = null
+  customizeFilter.bodyPart = null
+  customizeFilter.noJump = null
+  customizeFilter.noEquipment = null
+  customizeFilter.equimentType = null
+  customizeFilter.time = null
+  customizeFilter.difficuity = null
+  customizeFilter.type = null
 }
 
 const close = () => {
