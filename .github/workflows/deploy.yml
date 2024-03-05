@@ -32,7 +32,7 @@ jobs:
           
       # Runs a single command using the runners shell
       - name: Deploy
-        uses: lienyun/pages-build-deployment@v1
+        uses: JamesIves/github-pages-deploy-action@releases/v4
         with:
           BRANCH: gh-pages # deploy 到 gh-pages 這個分支
           FOLDER: dist # build 後的資料夾
