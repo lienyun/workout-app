@@ -34,6 +34,6 @@ jobs:
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@releases/v4
         with:
-          TEST_SECRET: ${{ secrets.TEST_SECRET }}
+          token: ${{ secrets.TEST_SECRET }}
           BRANCH: gh-pages # deploy 到 gh-pages 這個分支
           FOLDER: dist # build 後的資料夾
